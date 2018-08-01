@@ -137,10 +137,10 @@
 				<!-- <classifier>exec</classifier>
 							<executable>true</executable>
 							<layout>ZIP</layout>
-				<mainClass>com.videocall.app.aduiovideocall.AduiovideocallApplication</mainClass> -->
+				<mainClass>com.videocall.app.aduiovideocall.AduiovideocallApplication</mainClass> 
 							<jvmArguments>
 								-Dkms.url=ws://18.219.2.46:8888/kurento
-							</jvmArguments>
+							</jvmArguments>-->
 						</configuration>
 			</plugin>
 		</plugins>
