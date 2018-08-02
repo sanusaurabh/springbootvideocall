@@ -55,7 +55,9 @@ public class One2OneCallAdvApp implements WebSocketConfigurer {
 
   @Bean
   public KurentoClient kurentoClient() {
-    return KurentoClient.create();
+     org.kurento.client.Properties  prop = new org.kurento.client.Properties(); 
+	  prop.add("kms.url", "ws://18.219.2.46:8888/kurento");
+    return KurentoClient.create(prop);
   }
 
   @Override
