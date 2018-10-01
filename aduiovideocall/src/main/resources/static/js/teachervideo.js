@@ -94,23 +94,20 @@ function enableButton(id, functionName) {
 
 window.onload = function() {
 	console = new Console();
-    // var fiveMinutes = 60 * 5,
+    // var fiveMinutes = 60 * 1,
     //     display = document.querySelector('#time');
     // startTimer(fiveMinutes, display);
-
-
 
 	//setRegisterState(NOT_REGISTERED);
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
-
+	//call();
 	//document.getElementById('name').focus();
+
 }
-
-
 setTimeout("register()", 1000);
-setTimeout("call()", 1000);
+
 window.onbeforeunload = function() {
 	ws.close();
 }
@@ -220,6 +217,9 @@ function incomingCall(message) {
 			callResponse : 'reject',
 			message : 'bussy'
 		};
+        var fiveMinutes = 60 * 1,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
 		return sendMessage(response);
 	}
 
@@ -266,8 +266,8 @@ function onOfferIncomingCall(error, offerSdp) {
 }
 
 function register() {
-	//var name = document.getElementById('name').value;
     var name = document.getElementById('email_id').value = document.getElementById('email_id').innerHTML;
+	//var name = document.getElementById('name').value;
 	if (name == '') {
 		window.alert('You must insert your user name');
 		document.getElementById('name').focus();
@@ -439,8 +439,9 @@ function startTimer(duration, display) {
             timer = duration;
         }
         if(timer==0){
-            stop(true);
-        }
+        	stop(true);
+            window.location.reload();
+		}
     }, 1000);
 }
 

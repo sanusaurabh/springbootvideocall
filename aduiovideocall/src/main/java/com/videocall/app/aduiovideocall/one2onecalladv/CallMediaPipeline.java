@@ -25,13 +25,7 @@ import org.kurento.client.MediaPipeline;
 import org.kurento.client.RecorderEndpoint;
 import org.kurento.client.WebRtcEndpoint;
 
-/**
- * Media Pipeline (connection of Media Elements) for the advanced one to one video communication.
- * 
- * @author Boni Garcia (bgarcia@gsyc.es)
- * @author Micael Gallego (micael.gallego@gmail.com)
- * @since 5.0.0
- */
+
 public class CallMediaPipeline {
 
   private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-S");

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{fragments/main_layout}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Success page</title>
+
+</head>
+<body>
+
+<div class="container">
+	<button class="btn btn-success eBtn" >New</button>
+
+	<div class="card">
+		<div class="card-block">
+			<table class="table table-hover table-striped  ">
+
+				<thead class="thead-light">
+				<tr>
+					<th>ID</th>
+					<th>Country</th>
+					<th>Captial</th>
+					<th>Captial</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="country : ${data}">
+					<td th:text="${country.id}"></td>
+					<td th:text="${country.countryName}"></td>
+					<td th:text="${country.countryCapital}"></td>
+					<td><a  th:href="@{/delete(id=${country.id})}" class="btn btn-danger delBtn">Delete</a></td>
+					<td><a  th:href="@{/findOne(id=${country.id})}" class="btn btn-primary eBtn">Edit</a></td>
+
+				</tr>
+				</tbody>
+			</table>
+			<hr />
+			<ul class="nav nav-pills">
+				<li class="nav-item"
+					th:each="i: ${#numbers.sequence(0,data.totalPages-1)}"><a
+						th:href="@{/(page=${i})}" th:text="${i}" class="nav-link"
+						th:classappend="${currentPage}==${i} ? 'active':''"></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="myForm">
+		<form th:action="@{/save}" method="post">
+
+
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Update or Create</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="id" class="col-form-label">ID:</label>
+								<input type="text" class="form-control" id="id" name="id" value=""/>
+							</div>
+							<div class="form-group">
+								<label for="countryName" class="col-form-label">Country Name:</label>
+								<input type="text" class="form-control" id="countryName" name="countryName" value=""/>
+							</div>
+							<div class="form-group">
+								<label for="countryCapital" class="col-form-label">Country Capital:</label>
+								<input type="text" class="form-control" id="countryCapital" name="countryCapital" value=""/>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="Save">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class ="alert alert-danger">
+
+						Are you sure you want to delete this country?
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<a href="" class="btn btn-danger" id="delRef">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+</body>
+</html>

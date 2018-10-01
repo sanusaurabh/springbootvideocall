@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/main_layout}">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/subjectlevel.js" th:src="@{/js/subjectlevel.js}"></script>
+</head>
+<body>
+<div layout:fragment="content" class="container mySpace">
+
+    <div class="list-group">
+        <!--href="/loadWait"  onclick='register()'-->
+        <a href="/videoChat" class="list-group-item list-group-item-action flex-column align-items-start active" onclick='register()'>
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"  align="center" >Lavel 1</h5>
+            </div>
+        </a>
+    </div>
+    <br>
+    <br>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"  align="center">Lavel 2</h5>
+            </div>
+        </a>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" align="center">Lavel 3</h5>
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>

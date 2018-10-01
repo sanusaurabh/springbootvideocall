@@ -51,9 +51,20 @@ public class UserSession {
   private WebRtcEndpoint playingWebRtcEndpoint;
   private final List<IceCandidate> candidateList = new ArrayList<>();
 
-  public UserSession(WebSocketSession session, String name) {
+  private String role ;
+
+  public UserSession(WebSocketSession session, String name, String role) {
     this.session = session;
     this.name = name;
+    this.role=role;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
   }
 
   public WebSocketSession getSession() {

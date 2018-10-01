@@ -18,8 +18,12 @@
 package com.videocall.app.aduiovideocall.one2onecalladv;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.videocall.app.aduiovideocall.web.entity.User;
+import com.videocall.app.aduiovideocall.web.srvice.UserService;
 import org.kurento.client.EndOfStreamEvent;
 import org.kurento.client.EventListener;
 import org.kurento.client.IceCandidate;
@@ -61,6 +65,11 @@ public class CallHandler extends TextWebSocketHandler {
   @Autowired
   private UserRegistry registry;
 
+  @Autowired
+  private UserService userService;
+
+  private Map<String,String> loggedTeacherPool = new HashMap<>();
+
   @Override
   public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
     JsonObject jsonMessage = gson.fromJson(message.getPayload(), JsonObject.class);
@@ -77,6 +86,7 @@ public class CallHandler extends TextWebSocketHandler {
         register(session, jsonMessage);
         break;
       case "call":
+
         call(user, jsonMessage);
         break;
       case "incomingCallResponse":
@@ -109,9 +119,11 @@ public class CallHandler extends TextWebSocketHandler {
   }
 
   private void register(WebSocketSession session, JsonObject jsonMessage) throws IOException {
-    String name = jsonMessage.getAsJsonPrimitive("name").getAsString();
-
-    UserSession caller = new UserSession(session, name);
+    String email = jsonMessage.getAsJsonPrimitive("name").getAsString();
+    User  user =userService.findOne(email);
+    String name =user.getName();///userService.findOne(email).getName();
+    //UserSession caller = new UserSession(session, name,user.getRoles().get(0).getName());
+    UserSession caller = new UserSession(session, name+"/"+email,user.getRoles().get(0).getName());
     String responseMsg = "accepted";
     if (name.isEmpty()) {
       responseMsg = "rejected: empty user name";
@@ -128,8 +140,9 @@ public class CallHandler extends TextWebSocketHandler {
   }
 
   private void call(UserSession caller, JsonObject jsonMessage) throws IOException {
-    String to = jsonMessage.get("to").getAsString();
-    String from = jsonMessage.get("from").getAsString();
+    String to = registry.getOneTeacherFromloggedPool();//"sanu1";//jsonMessage.get("to").getAsString();
+    //registry.getOneTeacherFromloggedPool();
+    String from = caller.getName();//"sanu";//jsonMessage.get("from").getAsString();
     JsonObject response = new JsonObject();
 
     if (registry.exists(to)) {
@@ -150,6 +163,8 @@ public class CallHandler extends TextWebSocketHandler {
       caller.sendMessage(response);
     }
   }
+
+
 
   private void incomingCallResponse(final UserSession callee, JsonObject jsonMessage)
       throws IOException {

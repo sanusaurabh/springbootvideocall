@@ -35,10 +35,13 @@ public class UserRegistry {
 
   private ConcurrentHashMap<String, UserSession> usersByName = new ConcurrentHashMap<>();
   private ConcurrentHashMap<String, UserSession> usersBySessionId = new ConcurrentHashMap<>();
+  private ConcurrentHashMap<String, UserSession> teacherPool = new ConcurrentHashMap<>();
 
   public void register(UserSession user) {
     usersByName.put(user.getName(), user);
     usersBySessionId.put(user.getSession().getId(), user);
+    if("teacher".equalsIgnoreCase(user.getRole()))
+    teacherPool.put(user.getSession().getId(), user);
   }
 
   public UserSession getByName(String name) {
@@ -58,8 +61,24 @@ public class UserRegistry {
     if (user != null) {
       usersByName.remove(user.getName());
       usersBySessionId.remove(session.getId());
+     // teacherPool.remove(session.getId());
     }
     return user;
+  }
+
+  public String getOneTeacherFromloggedPool() {
+    String name="";
+
+    for(String id :usersBySessionId.keySet()){
+      UserSession userSession = usersBySessionId.get(id);
+      if(userSession.getCallingFrom()==null && userSession.getRole().equalsIgnoreCase("teacher"))
+      name =userSession.getName();
+      return name;
+
+    }
+
+    return name;
+
   }
 
 }
