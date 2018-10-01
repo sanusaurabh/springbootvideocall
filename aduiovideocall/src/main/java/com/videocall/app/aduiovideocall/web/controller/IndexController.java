@@ -8,10 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 	
-	@GetMapping("/favicon.ico")
-	public String showIndexPage(){
-		return "index";
-	}
+//	@GetMapping("/favicon.ico")
+//	public String showIndexPage(){
+//		return "index";
+//	}
 	
 	@RequestMapping(value={"/", "page*","view/*,**/msg"})
 	public ModelAndView indexMultipleMapping(){
