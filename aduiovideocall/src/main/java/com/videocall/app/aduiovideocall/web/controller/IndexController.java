@@ -2,14 +2,21 @@ package com.videocall.app.aduiovideocall.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
 	
-	@GetMapping("/")
-	public String showIndexPage(){
-		return "index";
-	}
+//	@GetMapping("/")
+//	public String showIndexPage(){
+//		return "index";
+//	}
+	
+	@RequestMapping(value={"/", "/favicon.ico", "page*","view/*,**/msg"})
+	public ModelAndView indexMultipleMapping(){
+	     return new ModelAndView("index.html");
+	  }
 
 	@GetMapping("/subjectLevel")
 	public String subjectLevelPage(){
