@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebA
 		http
 				.sessionManagement()
 				.maximumSessions(1).sessionRegistry(sessionRegistry());
-	http.authorizeRequests().antMatchers("/register","/favicon.ico","/", "/about", "/login", "/css/**","/js/**", "/webjars/**").permitAll()
+	http.authorizeRequests().antMatchers("/register","/favicon.ico","/", "/about", "/login", "/img/**","/css/**","/js/**", "/webjars/**").permitAll()
 	.antMatchers("/profile","/subjectLevel").hasAnyRole("USER","TEACHER","ADMIN")
 	.antMatchers("/users","/addTask").hasRole("ADMIN")
 	.and().formLogin().loginPage("/login").permitAll()
