@@ -99,7 +99,7 @@ window.onload = function() {
 
 	//setRegisterState(NOT_REGISTERED);
 	 //ws = new WebSocket('wss://' + location.host + '/call');
-	// ws.onopen();
+	 ws.onopen();
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
@@ -388,7 +388,7 @@ function stop(message) {
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
 	console.log('Senging message: ' + jsonMessage);
-	ws.send(jsonMessage);
+	this.send(jsonMessage);
 }
 
 function onIceCandidate(candidate) {
