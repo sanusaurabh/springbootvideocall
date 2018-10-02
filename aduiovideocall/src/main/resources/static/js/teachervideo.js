@@ -99,7 +99,7 @@ window.onload = function() {
 
 	//setRegisterState(NOT_REGISTERED);
 	 //ws = new WebSocket('wss://' + location.host + '/call');
-	 ws.onopen();
+	// ws.onopen();
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
