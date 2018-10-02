@@ -16,6 +16,7 @@
  */
 
 var ws = new WebSocket('wss://' + location.host + '/call');
+//var ws ;//= new WebSocket('wss://' + location.host + '/call');
 var videoInput;
 var videoOutput;
 var webRtcPeer;
@@ -94,11 +95,11 @@ function enableButton(id, functionName) {
 
 window.onload = function() {
 	console = new Console();
-    // var fiveMinutes = 60 * 1,
-    //     display = document.querySelector('#time');
-    // startTimer(fiveMinutes, display);
+    
 
 	//setRegisterState(NOT_REGISTERED);
+	 //ws = new WebSocket('wss://' + location.host + '/call');
+	 ws.onopen();
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
