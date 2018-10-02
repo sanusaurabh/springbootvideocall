@@ -98,8 +98,8 @@ window.onload = function() {
     
 
 	//setRegisterState(NOT_REGISTERED);
-	 //ws = new WebSocket('wss://' + location.host + '/call');
-	 ws.onopen();
+	 ws = new WebSocket('wss://' + location.host + '/call');
+	
 	var drag = new Draggabilly(document.getElementById('videoSmall'));
 	videoInput = document.getElementById('videoInput');
 	videoOutput = document.getElementById('videoOutput');
@@ -388,7 +388,7 @@ function stop(message) {
 function sendMessage(message) {
 	var jsonMessage = JSON.stringify(message);
 	console.log('Senging message: ' + jsonMessage);
-	this.send(jsonMessage);
+	ws.send(jsonMessage);
 }
 
 function onIceCandidate(candidate) {
